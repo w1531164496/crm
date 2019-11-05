@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>客户管理</title>
+<link rel="stylesheet" href="plugins/layui/css/layui.css">
+
+</head>
+
+<body class="layui-layout-body">
+<!-- 下一行是页面主内容开始 -->
+	<div class="layui-layout layui-layout-admin">
+		
+		<!-- 页面头部开始-->
+		<div class="layui-header">
+			<div class="layui-logo">CRM系统</div>
+			<ul class="layui-nav layui-layout-right">
+
+				<li class="layui-nav-item" lay-unselect=""><a
+					href="javascript:;"><img src="//t.cn/RCzsdCq"
+						class="layui-nav-img"id="curuser">用户</a>
+					<dl class="layui-nav-child">
+						<dd>
+							<a href="javascript:;">修改信息</a>
+						</dd>
+
+
+					</dl>
+				</li>
+				<dl class="layui-nav-child">
+					<dd>
+						<a href="">修改密码</a>
+					</dd>
+				</dl>
+				<li class="layui-nav-item">
+				<a class="out">退出</a>
+				</li>
+			</ul>
+		</div>
+		<!-- 页面头部结束-->
+		
+  		<!-- 页面左侧导航开始 -->
+		<div class="layui-side layui-bg-black">
+			<div class="layui-side-scroll">
+				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+				<ul class="layui-nav layui-nav-tree" lay-filter="test">
+					<li class="layui-nav-item layui-nav-itemed">
+
+						<dl class="layui-nav-child">
+							<dd>
+								<a href="Regional.html">区域管理</a>
+							</dd>
+							<dd>
+								<a href="Employee.html">员工管理</a>
+							</dd>
+							<dd>
+								<a href="customer.html">客户管理</a>
+							</dd>
+
+
+						</dl>
+					</li>
+
+				</ul>
+			</div>
+		</div>
+		<!-- 页面左侧导航结束 -->
+		
+		
+		<!-- 内容主体区域开始 -->
+		<div class="layui-body" style="margin: 20px;">
+			
+	<!-- 表格数据开始 -->
+			<div class="demoTable">
+	<!-- 顶部搜索栏开始 -->
+				<form class="layui-form" action="">
+					<div class="layui-form-item">
+					<div class="layui-input-inline" style="width: 200px;">
+							<select name="city" id="condition"lay-verify="required">
+								
+								<option value="name">姓名</option>
+								<option value="telephone">联系方式</option>
+								<option value="region">区域</option>
+							
+							</select>
+						</div>
+						<div class="layui-input-inline" style="width: 200px;">
+							<input type="text" name="title" id="key"required lay-verify="required"
+								autocomplete="off" class="layui-input">
+
+						</div>
+
+
+						<a class="layui-btn" data-type="reload"
+							style="margin-left: 40px">搜索</a>
+						<a class="layui-btn" data-type="increase"
+							style="float: right">添加</a>
+							  <a href="/crm/CustomerServlet?action=dao">
+          <button type="button" class="layui-btn" id="delPro">导出Excel</button>
+          </a>
+
+					</div>
+				</form>
+				<!-- 顶部搜索栏结束 -->
+				
+				<!-- 显示数据的表格 -->
+				 <table class="layui-hide" id="idTest" lay-filter="tool-event"></table>
+				<script type="text/html" id="barDemo">
+           				<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+           				<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+          			</script>
+          			<!-- 显示数据的表格结束 -->
+			</div>
+			<!-- 表格数据结束 -->
+			<div class="layui-footer">
+				<!-- 底部固定区域 -->
+				版权所有：潍坊汇才大数据有限公司
+			</div>
+		</div>
+		
+		
+		<!-- 内容主题区域结束 -->
+		
+		
+		
+		
+		<script src="plugins/layui/layui.js"></script>
+		<script src="scripts/home.js"></script>
+		<script src="plugins/jquery/jquery.min.js"></script>
+		<script src="scripts/customer.js"></script>
+		<script src="scripts/util.js"></script>
+		<script>
+			//JavaScript代码区域
+			layui.use('element', function() {
+				var element = layui.element;
+
+			});
+		</script>
+		
+		
+		<!-- 修改界面代码 -->
+		
+		<div id="update" style="margin:20px;display:none;">
+      <form class="layui-form">
+        <input type="hidden" name="id" id="id">
+        
+        <!-- 表单项开始 -->
+        <div class="layui-form-item">
+          <label class="layui-form-label">姓名</label>
+          <div class="layui-input-block">
+            <input type="text" name="name" id="name" lay-verify="required" maxlength="32" autocomplete="off"
+              placeholder="请输入姓名" class="layui-input">
+          </div>
+        </div>
+        <!-- 表单项目结束 -->
+        
+        <div class="layui-form-item">
+          <label class="layui-form-label">联系电话</label>
+          <div class="layui-input-block">
+            <input type="text" name="telephone" id="telephone" lay-verify="required|user_password" placeholder="请输入联系电话"
+              autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">客户状态</label>
+          <div class="layui-input-block">
+            <input type="text" name="status" id="status"  lay-verify="" placeholder="请输入客户状态" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+        
+		<div class="layui-form-item">
+          <label class="layui-form-label">沟通记录</label>
+          <div class="layui-input-block">
+            <input type="text" name="record" id="record" lay-verify="" placeholder="请输入沟通记录" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+        
+        <div class="layui-form-item">
+          <label class="layui-form-label">区域</label>
+          <div class="layui-input-block">
+            <input type="text" name="region" id="region" lay-verify="" placeholder="请输入区域" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+        
+        <div class="layui-form-item">
+          <label class="layui-form-label">员工id</label>
+          <div class="layui-input-block">
+            <input type="text" name="Employeeid" id="Employeeid" lay-verify="" placeholder="请输入员工id" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="save-update">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+    
+    </div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<!-- 修改界面代码结束 -->
+		
+		
+		
+		
+		
+		
+		<!-- 添加界面代码开始 -->
+		
+	<div id="add" style="margin:20px;display:none;">
+      <form class="layui-form">
+<!-- 添加不需要id -->
+        
+        <!-- 表单项开始 -->
+        <div class="layui-form-item">
+          <label class="layui-form-label">姓名</label>
+          <div class="layui-input-block">
+            <input type="text" name="nameadd" id="nameadd" lay-verify="required" maxlength="32" autocomplete="off"
+              placeholder="请输入姓名" class="layui-input">
+          </div>
+        </div>
+        <!-- 表单项目结束 -->
+        
+        <div class="layui-form-item">
+          <label class="layui-form-label">联系电话</label>
+          <div class="layui-input-block">
+            <input type="text" name="telephoneadd" id="telephoneadd" lay-verify="required|user_password" placeholder="请输入联系电话"
+              autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+
+        <div class="layui-form-item">
+          <label class="layui-form-label">客户状态</label>
+          <div class="layui-input-block">
+            <input type="text" name="statusadd" id="statusadd"  lay-verify="" placeholder="请输入客户状态" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+        
+		<div class="layui-form-item">
+          <label class="layui-form-label">沟通记录</label>
+          <div class="layui-input-block">
+            <input type="text" name="recordadd" id="recordadd" lay-verify="" placeholder="请输入沟通记录" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+        
+        <div class="layui-form-item">
+          <label class="layui-form-label">区域</label>
+          <div class="layui-input-block">
+            <input type="text" name="regionadd" id="regionadd" lay-verify="" placeholder="请输入区域" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+        
+        <div class="layui-form-item">
+          <label class="layui-form-label">员工id</label>
+          <div class="layui-input-block">
+            <input type="text" name="Employeeidadd" id="Employeeidadd" lay-verify="" placeholder="请输入员工id" autocomplete="off"
+              class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="" lay-filter="save-add">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+          </div>
+        </div>
+      </form>
+    
+    </div>
+		<!-- 添加界面代码结束 -->
+
+
+
+
+	</div>
+	<!-- 主内容结束 -->
+</body>
+
+</html>

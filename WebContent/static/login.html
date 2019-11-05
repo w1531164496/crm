@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>登录</title>
+    <link rel="stylesheet" href="plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-bg" >
+	<div class="login-width">
+		<!-- <form class="layui-form"> -->
+			<div class="login">
+				<div class="i-g username">
+					<input type="text" lay-verify="user_account" autocomplete="off" name="user_account" id="userName"
+						class="txt">
+				</div>
+				<div class="i-g pwd">
+					<input type="password" lay-verify="user_password" autocomplete="off" name="user_password"
+						id="password" class="txt">
+				</div>
+				<div class="i-g pwd">
+					<input type="text" lay-verify="user_password" autocomplete="off" name="code"
+						id="code" class="txt">
+						<img src="http://localhost:8080/crm/CodeServlet"  id="codeImg" alt="点击更换">
+				</div>
+				
+				<button lay-submit="" lay-filter="deng" id="submit">登陆</button>
+			</div>
+		<!-- </form> -->
+	</div>
+</body>
+<script src="plugins/layui/layui.js"></script>
+<script src="plugins/jquery/jquery.min.js"></script>
+<script src="scripts/login.js"></script>
+<script src="scripts/code.js"></script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+    <script src="layui/layui.js"></script>
+</head>
+<body>
+    
+    <textarea id="demo" style="display: none;"></textarea>
+    <script>
+    layui.use('layedit', function(){
+      var layedit = layui.layedit;
+
+    layedit.set({
+    uploadImage: {
+        url: 'http://localhost:8080/crm/UploadServlet' //接口url
+        ,type: 'post' //默认post
+    }
+    });
+
+
+
+      layedit.build('demo'); //建立编辑器
+    });
+    </script>
+
+
+
+
+</body>
+</html>
